@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SNarGPT • MVP High‑Fidelity Wireframe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <style>
+    /* Google Material Design 3 Color System */
+    :root {
+      /* Primary Colors */
+      --md-primary: #6750A4;
+      --md-on-primary: #FFFFFF;
+      --md-primary-container: #EADDFF;
+      --md-on-primary-container: #21005D;
+      
+      /* Secondary Colors */
+      --md-secondary: #625B71;
+      --md-on-secondary: #FFFFFF;
+      --md-secondary-container: #E8DEF8;
+      --md-on-secondary-container: #1D192B;
+      
+      /* Tertiary Colors */
+      --md-tertiary: #7D5260;
+      --md-on-tertiary: #FFFFFF;
+      --md-tertiary-container: #FFD8E4;
+      --md-on-tertiary-container: #31111D;
+      
+      /* Error Colors */
+      --md-error: #BA1A1A;
+      --md-on-error: #FFFFFF;
+      --md-error-container: #FFDAD6;
+      --md-on-error-container: #410002;
+      
+      /* Surface Colors */
+      --md-surface: #FEF7FF;
+      --md-on-surface: #1C1B1F;
+      --md-surface-variant: #E7E0EC;
+      --md-on-surface-variant: #49454F;
+      --md-surface-container: #F3EDF7;
+      --md-surface-container-high: #ECE6F0;
+      --md-surface-container-highest: #E6E0E9;
+      
+      /* Outline Colors */
+      --md-outline: #79747E;
+      --md-outline-variant: #CAC4D0;
+      
+      /* Background Colors */
+      --md-background: #FEF7FF;
+      --md-on-background: #1C1B1F;
+      
+      /* Shadow */
+      --md-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      --md-shadow-elevated: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      --md-shadow-high: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--md-background);
+      color: var(--md-on-background);
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--md-primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: var(--md-surface);
+      border-right: 1px solid var(--md-outline-variant);
+      padding: 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      box-shadow: var(--md-shadow);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: 0.15px;
+      margin-bottom: 32px;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      display: grid;
+      place-items: center;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .side-links {
+      display: grid;
+      gap: 4px;
+    }
+
+    .side-links a {
+      padding: 12px 16px;
+      border-radius: 20px;
+      color: var(--md-on-surface);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .side-links a:hover {
+      background: var(--md-surface-container);
+    }
+
+    .kbd {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: var(--md-on-surface-variant);
+    }
+
+    .main {
+      padding: 32px;
+      background: var(--md-background);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pill {
+      padding: 8px 16px;
+      border-radius: 16px;
+      background: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--md-primary);
+      border: none;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.cols-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .panel {
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--md-shadow);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .panel:hover {
+      box-shadow: var(--md-shadow-elevated);
+    }
+
+    .panel h3 {
+      margin: 0 0 16px 0;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--md-on-surface);
+    }
+
+    .muted {
+      color: var(--md-on-surface-variant);
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 16px;
+      background: var(--md-surface-container);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--md-on-surface);
+      transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+      background: var(--md-surface-container-high);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 20px;
+      border: 1px solid var(--md-outline);
+      background: var(--md-surface);
+      color: var(--md-on-surface);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--md-shadow);
+    }
+
+    .btn:hover {
+      background: var(--md-surface-container);
+      box-shadow: var(--md-shadow-elevated);
+    }
+
+    .btn.primary {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      border: none;
+      font-weight: 500;
+    }
+
+    .btn.primary:hover {
+      background: var(--md-primary);
+      opacity: 0.9;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .btn.ghost:hover {
+      background: var(--md-surface-container);
+    }
+
+    .btn.small {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
+    .input, textarea, select {
+      width: 100%;
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline);
+      border-radius: 4px;
+      color: var(--md-on-surface);
+      padding: 16px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--md-primary);
+      box-shadow: 0 0 0 2px var(--md-primary-container);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .chip {
+      padding: 8px 16px;
+      border-radius: 16px;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--md-on-surface-variant);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip:hover {
+      background: var(--md-surface-container-high);
+    }
+
+    .seg {
+      display: inline-flex;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .seg button {
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      color: var(--md-on-surface-variant);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .seg button.active {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+    }
+
+    .answer-step {
+      padding: 16px;
+      border-left: 4px solid var(--md-primary);
+      background: var(--md-primary-container);
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+
+    .math {
+      font-family: 'Roboto Mono', monospace;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 8px;
+      padding: 16px;
+      overflow: auto;
+      font-size: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+    }
+
+    .table th {
+      color: var(--md-on-surface-variant);
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      padding: 0 16px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr 120px 120px;
+      gap: 16px;
+      align-items: center;
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--md-shadow);
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .plan {
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: var(--md-shadow);
+      transition: all 0.2s ease;
+    }
+
+    .plan:hover {
+      box-shadow: var(--md-shadow-elevated);
+    }
+
+    .plan.pop {
+      border: 2px solid var(--md-primary);
+      box-shadow: var(--md-shadow-high);
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--md-on-surface);
+    }
+
+    .strike {
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+
+    .notice {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      border: 1px solid var(--md-outline-variant);
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--md-surface-container);
+    }
+
+    .badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+    }
+
+    .skeleton {
+      height: 16px;
+      background: var(--md-surface-container);
+      border-radius: 8px;
+      opacity: 0.6;
+      animation: skeleton-loading 1.5s ease-in-out infinite;
+    }
+
+    @keyframes skeleton-loading {
+      0% { opacity: 0.6; }
+      50% { opacity: 0.3; }
+      100% { opacity: 0.6; }
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--md-outline-variant);
+      margin: 24px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0 16px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .nav-tabs a {
+      padding: 12px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--md-outline);
+      text-decoration: none;
+      color: var(--md-on-surface-variant);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tabs a.active {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      border: none;
+    }
+
+    .sticky-cta {
+      position: sticky;
+      bottom: 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    /* SPA Page Management */
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .side-links a.active {
+      background: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+    }
+
+    .side-links a:hover {
+      background: var(--md-surface-container);
+    }
+
+    /* Chat Interface Styles */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 64px);
+      max-height: calc(100vh - 64px);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message {
+      display: flex;
+      gap: 12px;
+      max-width: 100%;
+    }
+
+    .message.user {
+      flex-direction: row-reverse;
+    }
+
+    .message.assistant {
+      flex-direction: row;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .message.user .message-avatar {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+    }
+
+    .message.assistant .message-avatar {
+      background: var(--md-secondary-container);
+      color: var(--md-on-secondary-container);
+    }
+
+    .message-content {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      word-wrap: break-word;
+    }
+
+    .message.user .message-content {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.assistant .message-content {
+      background: var(--md-surface-container);
+      color: var(--md-on-surface);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: var(--md-on-surface-variant);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .message.assistant .message-time {
+      text-align: left;
+    }
+
+    .chat-input-container {
+      padding: 20px;
+      background: var(--md-surface);
+      border-top: 1px solid var(--md-outline-variant);
+      position: sticky;
+      bottom: 0;
+    }
+
+    .chat-input-form {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .chat-input {
+      flex: 1;
+      min-height: 44px;
+      max-height: 120px;
+      resize: none;
+      border-radius: 22px;
+      padding: 12px 20px;
+      border: 1px solid var(--md-outline);
+      background: var(--md-surface-container);
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--md-primary);
+      box-shadow: 0 0 0 2px var(--md-primary-container);
+    }
+
+    .chat-send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 22px;
+      border: none;
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chat-send-btn:hover {
+      background: var(--md-primary);
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    .chat-send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--md-on-surface-variant);
+      font-size: 14px;
+      padding: 12px 16px;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--md-on-surface-variant);
+      animation: typing 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .math-block {
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px 0;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      padding: 8px 12px;
+      background: var(--md-primary-container);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Chat History Styles */
+    .chat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .chat-item {
+      padding: 16px;
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--md-shadow);
+    }
+
+    .chat-item:hover {
+      background: var(--md-surface-container);
+      box-shadow: var(--md-shadow-elevated);
+      transform: translateY(-1px);
+    }
+
+    .chat-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .chat-item-title {
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--md-on-surface);
+      flex: 1;
+      margin-right: 12px;
+    }
+
+    .chat-item-time {
+      font-size: 12px;
+      color: var(--md-on-surface-variant);
+      white-space: nowrap;
+    }
+
+    .chat-item-preview {
+      font-size: 14px;
+      color: var(--md-on-surface-variant);
+      margin-bottom: 12px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .chat-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chat-item-message-count {
+      font-size: 12px;
+      color: var(--md-on-surface-variant);
+      margin-left: auto;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--md-on-surface-variant);
+    }
+
+    .empty-state h3 {
+      margin: 16px 0 8px 0;
+      color: var(--md-on-surface);
+    }
+
+    .empty-state p {
+      margin: 0 0 24px 0;
+      font-size: 14px;
+    }
+
+    /* Clean Welcome Screen */
+    .welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 60vh;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .welcome-message {
+      font-size: 18px;
+      color: var(--md-on-surface-variant);
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .main-input-container {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .main-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--md-surface);
+      border: 2px solid var(--md-outline-variant);
+      border-radius: 24px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+      box-shadow: var(--md-shadow);
+    }
+
+    .main-input-wrapper:focus-within {
+      border-color: var(--md-primary);
+      box-shadow: 0 0 0 3px var(--md-primary-container);
+    }
+
+    .main-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 16px;
+      color: var(--md-on-surface);
+      padding: 8px 12px;
+      font-family: inherit;
+    }
+
+    .main-input::placeholder {
+      color: var(--md-on-surface-variant);
+    }
+
+    .input-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--md-on-surface-variant);
+    }
+
+    .action-btn:hover {
+      background: var(--md-surface-container);
+      color: var(--md-on-surface);
+    }
+
+    .action-btn.primary {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+    }
+
+    .action-btn.primary:hover {
+      background: var(--md-primary);
+      opacity: 0.9;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 12px;
+      box-shadow: var(--md-shadow-high);
+      z-index: 1000;
+      margin-top: 8px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      font-size: 14px;
+      color: var(--md-on-surface);
+    }
+
+    .dropdown-item:hover {
+      background: var(--md-surface-container);
+    }
+
+    .dropdown-item-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .dropdown-item-text {
+      flex: 1;
+    }
+
+    .dropdown-item-badge {
+      background: var(--md-error-container);
+      color: var(--md-on-error-container);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .dropdown-item-badge.premium {
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .premium-item {
+      position: relative;
+    }
+
+    .premium-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .premium-item:hover {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .quick-action-btn {
+      padding: 8px 16px;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 20px;
+      color: var(--md-on-surface);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-action-btn:hover {
+      background: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+      border-color: var(--md-primary);
+    }
+
+    /* Subject Selection Tabs */
+    .subject-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .subject-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-on-surface);
+    }
+
+    .subject-tab:hover {
+      background: var(--md-surface-container-high);
+      border-color: var(--md-outline);
+    }
+
+    .subject-tab.active {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      border-color: var(--md-primary);
+    }
+
+    .subject-icon {
+      font-size: 16px;
+    }
+
+    .subject-name {
+      font-weight: 500;
+    }
+
+    .subject-notice {
+      text-align: center;
+      font-size: 12px;
+      color: var(--md-on-surface-variant);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* Exploration Submenu */
+    .exploration-submenu {
+      background: var(--md-surface);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 16px;
+      box-shadow: var(--md-shadow-elevated);
+      margin-top: 16px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .submenu-section {
+      margin-bottom: 20px;
+    }
+
+    .submenu-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .submenu-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--md-on-surface);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--md-outline-variant);
+    }
+
+    .submenu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px;
+    }
+
+    .submenu-item {
+      padding: 8px 12px;
+      background: var(--md-surface-container);
+      border: 1px solid var(--md-outline-variant);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 13px;
+      text-align: center;
+      color: var(--md-on-surface);
+    }
+
+    .submenu-item:hover {
+      background: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+      border-color: var(--md-primary);
+    }
+
+    .submenu-item.selected {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      border-color: var(--md-primary);
+    }
+
+    @media (max-width: 1024px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: relative;
+        height: auto;
+      }
+      .grid.cols-2, .grid.cols-3, .two-col, .pricing {
+        grid-template-columns: 1fr;
+      }
+      .row {
+        grid-template-columns: 120px 1fr 100px 100px;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .sidebar {
+        display: none;
+      }
+      .panel, .plan, .row {
+        break-inside: avoid;
+      }
+      .main {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- SIDEBAR NAV -->
+    <aside class="sidebar">
+      <div class="logo"><div class="logo-badge">SN</div> SNarGPT MVP</div>
+      <div class="side-links">
+        <a href="#overview">🏁 개요·플로우</a>
+        <a href="#auth">🔐 인증/회원</a>
+        <a href="#new-question">✍️ 새 질문하기</a>
+        <a href="#history">🗂 채팅 히스토리</a>
+        <a href="#pricing">💳 결제/구독</a>
+        <a href="#settings">⚙️ 설정</a>
+        <a href="#support">🛟 고객지원</a>
+      </div>
+      <div style="margin-top:20px" class="notice">
+        <div>📌</div>
+        <div>
+          <strong>MVP 범위</strong><br/>
+          질문하기/답변/히스토리 + 이메일/구글 로그인 + 단일 결제(카드/토스) 우선.
+        </div>
+      </div>
+      <div style="margin-top:12px" class="badge">Investor/Team Share • v1.0</div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main">
+      <!-- OVERVIEW / FLOW -->
+      <div id="overview" class="page active">
+        <section class="panel">
+        <div class="section-title">
+          <h3>① 개요 & 핵심 플로우</h3>
+          <span class="pill">목표: 2주 내 MVP 사용자 테스트</span>
+        </div>
+        <div class="grid cols-3">
+          <div class="panel">
+            <h3>온보딩</h3>
+            <div class="muted">이메일/구글 → 학년·성적대 선택 → 1회 체험 질문 유도</div>
+            <div class="divider"></div>
+            <div class="skeleton" style="width:70%"></div>
+            <div class="skeleton" style="width:50%;margin-top:8px"></div>
+          </div>
+          <div class="panel">
+            <h3>핵심 사용</h3>
+            <div class="muted">질문 업로드(텍스트/사진) → 빠른/정확 모드 → 단계별 풀이 확인</div>
+            <div class="divider"></div>
+            <div class="skeleton" style="width:85%"></div>
+            <div class="skeleton" style="width:60%;margin-top:8px"></div>
+          </div>
+          <div class="panel">
+            <h3>전환</h3>
+            <div class="muted">유사문항·오개념 교정 제안 → 사용량 임계 시 프리미엄 안내 → 결제</div>
+            <div class="divider"></div>
+            <div class="skeleton" style="width:65%"></div>
+            <div class="skeleton" style="width:40%;margin-top:8px"></div>
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <!-- AUTH -->
+      <div id="auth" class="page">
+        <section class="grid cols-2">
+        <div class="panel">
+          <h3>② 회원가입</h3>
+          <div class="grid cols-2">
+            <div>
+              <label class="muted">이메일</label>
+              <input class="input" placeholder="you@example.com"/>
+            </div>
+            <div>
+              <label class="muted">비밀번호</label>
+              <input class="input" placeholder="••••••••"/>
+              <div class="muted" style="font-size:12px;margin-top:6px">강도: ▉▉▉▊▁</div>
+            </div>
+          </div>
+          <div class="grid cols-3" style="margin-top:8px">
+            <input class="input" placeholder="이름"/>
+            <select class="input"><option>학년</option></select>
+            <input class="input" placeholder="학교"/>
+          </div>
+          <div class="grid cols-2" style="margin-top:8px">
+            <input class="input" placeholder="휴대폰 (SMS 인증)"/>
+            <select class="input"><option>현재 성적대 (1~9)</option></select>
+          </div>
+          <div class="toolbar">
+            <label><input type="checkbox"/> 약관 동의</label>
+            <span class="kbd">서비스 이용약관</span>
+            <span class="kbd">개인정보</span>
+            <span class="kbd">마케팅 수신(선택)</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn primary">이메일로 가입</button>
+            <button class="btn"><span>G</span> 구글로 계속</button>
+            <button class="btn">N 네이버</button>
+            <button class="btn">K 카카오</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>로그인 / 비밀번호 재설정</h3>
+          <input class="input" placeholder="이메일"/>
+          <input class="input" placeholder="비밀번호" style="margin-top:8px"/>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+            <label class="muted"><input type="checkbox"/> 자동 로그인</label>
+            <a href="#" class="muted">비밀번호 찾기</a>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn primary">로그인</button>
+            <button class="btn ghost">회원가입</button>
+          </div>
+          <div class="divider"></div>
+          <div class="muted">재설정: 이메일 인증 → 새 비밀번호 입력 → 완료 안내</div>
+        </div>
+      </section>
+      </div>
+
+      <!-- NEW QUESTION -->
+      <div id="new-question" class="page">
+        <div class="welcome-screen">
+          <div class="welcome-message">
+            수능, 입시에 관한 모든 문제를 질문해 보세요.
+          </div>
+          
+          <div class="main-input-container">
+            <div class="main-input-wrapper">
+              <button class="action-btn" onclick="toggleDropdown()">
+                <span>+</span>
+              </button>
+              <input 
+                type="text" 
+                class="main-input" 
+                placeholder="무엇이든 물어보세요"
+                id="mainQuestionInput"
+              />
+              <div class="input-actions">
+                <button class="action-btn" onclick="startVoiceInput()" title="음성 입력">
+                  <span>🎤</span>
+                </button>
+                <button class="action-btn primary" onclick="sendMainQuestion()" title="전송">
+                  <span>➤</span>
+                </button>
+        </div>
+            </div>
+            
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+              <div class="dropdown-item" onclick="uploadImage()">
+                <div class="dropdown-item-icon">📎</div>
+                <div class="dropdown-item-text">사진 및 파일 추가</div>
+            </div>
+              <div class="dropdown-item" onclick="addFromGoogleDrive()">
+                <div class="dropdown-item-icon">📁</div>
+                <div class="dropdown-item-text">Google Drive에서 추가</div>
+            </div>
+              <div class="dropdown-item" onclick="startDeepResearch()">
+                <div class="dropdown-item-icon">🔍</div>
+                <div class="dropdown-item-text">심층 리서치</div>
+          </div>
+              <div class="dropdown-item premium-item" onclick="enablePerfectAnswerMode()">
+                <div class="dropdown-item-icon">🎯</div>
+                <div class="dropdown-item-text">무조건 정답 내는 모드</div>
+                <div class="dropdown-item-badge premium">유료</div>
+              </div>
+              <div class="dropdown-item premium-item" onclick="enableGraphImageMode()">
+                <div class="dropdown-item-icon">📊</div>
+                <div class="dropdown-item-text">그래프, 이미지 출력 모드</div>
+                <div class="dropdown-item-badge premium">유료</div>
+              </div>
+              <div class="dropdown-item" onclick="showMoreOptions()">
+                <div class="dropdown-item-icon">⋯</div>
+                <div class="dropdown-item-text">더 보기</div>
+                <div class="dropdown-item-icon">→</div>
+            </div>
+              </div>
+            </div>
+          
+          <!-- Subject Selection Tabs -->
+          <div class="subject-tabs">
+            <div class="subject-tab active" data-subject="math" onclick="selectSubject('math')">
+              <span class="subject-icon">📐</span>
+              <span class="subject-name">수학</span>
+          </div>
+            <div class="subject-tab" data-subject="korean" onclick="selectSubject('korean')">
+              <span class="subject-icon">📖</span>
+              <span class="subject-name">국어</span>
+        </div>
+            <div class="subject-tab" data-subject="english" onclick="selectSubject('english')">
+              <span class="subject-icon">🔤</span>
+              <span class="subject-name">영어</span>
+            </div>
+            <div class="subject-tab" data-subject="exploration" onclick="selectSubject('exploration')">
+              <span class="subject-icon">🔬</span>
+              <span class="subject-name">탐구</span>
+            </div>
+          </div>
+          
+          <!-- Subject Selection Notice -->
+          <div class="subject-notice">
+            ※ 과목을 선택하면 더 정확한 답과 풀이를 얻을 수 있습니다.
+          </div>
+          
+          <!-- Exploration Subject Submenu -->
+          <div class="exploration-submenu" id="explorationSubmenu" style="display: none;">
+            <div class="submenu-section">
+              <div class="submenu-title">과학탐구</div>
+              <div class="submenu-items">
+                <div class="submenu-item" onclick="selectExplorationSubject('physics1')">물리학 I</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('physics2')">물리학 II</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('chemistry1')">화학 I</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('chemistry2')">화학 II</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('biology1')">생명과학 I</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('biology2')">생명과학 II</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('earth1')">지구과학 I</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('earth2')">지구과학 II</div>
+          </div>
+        </div>
+            <div class="submenu-section">
+              <div class="submenu-title">사회탐구</div>
+              <div class="submenu-items">
+                <div class="submenu-item" onclick="selectExplorationSubject('korean-history')">한국사</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('world-history')">세계사</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('geography')">지리</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('ethics')">윤리와 사상</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('society-culture')">사회·문화</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('politics-law')">정치와 법</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('economy')">경제</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('life-culture')">생활과 윤리</div>
+                <div class="submenu-item" onclick="selectExplorationSubject('world-geography')">세계지리</div>
+            </div>
+            </div>
+            </div>
+            </div>
+        
+        <!-- Hidden Chat Container (shown after first question) -->
+        <div class="chat-container" id="chatContainer" style="display: none;">
+          <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be added here dynamically -->
+          </div>
+          <div class="chat-input-container">
+            <div class="chat-input-form">
+              <textarea 
+                id="chatInput" 
+                class="chat-input" 
+                placeholder="수학 문제나 질문을 입력하세요... (Shift+Enter로 줄바꿈)"
+                rows="1"
+              ></textarea>
+              <button id="chatSendBtn" class="chat-send-btn" type="button">
+                <span>➤</span>
+              </button>
+                </div>
+            
+            <div class="toolbar" style="margin-top: 12px; justify-content: space-between;">
+              <div style="display: flex; gap: 8px;">
+                <span class="chip" onclick="uploadImage()">📷 이미지</span>
+                <span class="chip" onclick="startVoiceInput()">🎙️ 음성</span>
+                <select class="input" style="max-width: 180px; font-size: 12px;">
+                  <option>빠른 풀이</option>
+                  <option>정확한 풀이</option>
+                  <option>개념 설명</option>
+                </select>
+                </div>
+              <div class="muted" style="font-size: 12px;">
+                질문 14/20 • OCR 8/20
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- CHAT HISTORY -->
+      <div id="history" class="page">
+        <section class="panel">
+        <div class="section-title">
+            <h3>🗂 채팅 히스토리</h3>
+          <div style="display:flex;gap:8px;align-items:center">
+              <input class="input" placeholder="채팅 검색" style="max-width:240px" id="chatSearch"/>
+              <select class="input" style="max-width:160px" id="subjectFilter">
+                <option value="">전체 과목</option>
+                <option value="math">수학</option>
+                <option value="english">영어</option>
+                <option value="physics">물리</option>
+                <option value="chemistry">화학</option>
+              </select>
+              <select class="input" style="max-width:160px" id="statusFilter">
+                <option value="">전체 상태</option>
+                <option value="completed">완료</option>
+                <option value="ongoing">진행중</option>
+                <option value="pending">대기</option>
+              </select>
+          </div>
+        </div>
+          
+          <!-- Chat List -->
+          <div class="chat-list" id="chatList">
+            <!-- Sample Chat Items -->
+            <div class="chat-item" onclick="openChat('chat-001')">
+              <div class="chat-item-header">
+                <div class="chat-item-title">함수 f(x)=x²-3x+2의 극값</div>
+                <div class="chat-item-time">2분 전</div>
+              </div>
+              <div class="chat-item-preview">f'(x) = 2x - 3 = 0 → x = 1.5에서 극솟값...</div>
+              <div class="chat-item-meta">
+                <span class="badge">수학</span>
+                <span class="badge">완료</span>
+                <span class="chat-item-message-count">5개 메시지</span>
+              </div>
+            </div>
+
+            <div class="chat-item" onclick="openChat('chat-002')">
+              <div class="chat-item-header">
+                <div class="chat-item-title">확률분포의 기댓값 계산</div>
+                <div class="chat-item-time">1시간 전</div>
+              </div>
+              <div class="chat-item-preview">E[X] = Σ x·P(X=x) 공식을 사용하여...</div>
+              <div class="chat-item-meta">
+                <span class="badge">수학</span>
+                <span class="badge">완료</span>
+                <span class="chat-item-message-count">8개 메시지</span>
+              </div>
+            </div>
+
+            <div class="chat-item" onclick="openChat('chat-003')">
+              <div class="chat-item-header">
+                <div class="chat-item-title">문장 삽입 유형 해설</div>
+                <div class="chat-item-time">3시간 전</div>
+              </div>
+              <div class="chat-item-preview">문맥상 가장 적절한 문장을 찾는 문제...</div>
+              <div class="chat-item-meta">
+                <span class="badge">영어</span>
+                <span class="badge">진행중</span>
+                <span class="chat-item-message-count">3개 메시지</span>
+              </div>
+            </div>
+
+            <div class="chat-item" onclick="openChat('chat-004')">
+              <div class="chat-item-header">
+                <div class="chat-item-title">전기회로 옴의 법칙</div>
+                <div class="chat-item-time">1일 전</div>
+              </div>
+              <div class="chat-item-preview">V = I × R 공식을 적용하여 전압을 구하는...</div>
+              <div class="chat-item-meta">
+                <span class="badge">물리</span>
+                <span class="badge">완료</span>
+                <span class="chat-item-message-count">6개 메시지</span>
+              </div>
+            </div>
+
+            <div class="chat-item" onclick="openChat('chat-005')">
+              <div class="chat-item-header">
+                <div class="chat-item-title">미적분 기본정리 증명</div>
+                <div class="chat-item-time">2일 전</div>
+              </div>
+              <div class="chat-item-preview">F'(x) = f(x)인 함수 F(x)를 찾는 과정...</div>
+              <div class="chat-item-meta">
+                <span class="badge">수학</span>
+                <span class="badge">완료</span>
+                <span class="chat-item-message-count">12개 메시지</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-state" id="emptyState" style="display: none;">
+            <div style="text-align: center; padding: 40px; color: var(--md-on-surface-variant);">
+              <div style="font-size: 48px; margin-bottom: 16px;">💬</div>
+              <h3>아직 채팅이 없습니다</h3>
+              <p>새 질문하기에서 첫 번째 질문을 시작해보세요!</p>
+              <button class="btn primary" onclick="goToPage('new-question')" style="margin-top: 16px;">
+                새 질문하기
+              </button>
+            </div>
+        </div>
+      </section>
+      </div>
+
+      <!-- PRICING / BILLING -->
+      <div id="pricing" class="page">
+        <section class="panel">
+        <div class="section-title">
+          <h3>⑥ 결제/구독 관리</h3>
+          <div class="muted">Free 7일·질문 20회 체험 → Basic / Pro / Pro+</div>
+        </div>
+        <div class="pricing">
+          <div class="plan">
+            <div class="badge">Free</div>
+            <div class="price">₩0</div>
+            <div class="muted">질문 20 / OCR 20, 개념북</div>
+            <button class="btn small">시작하기</button>
+          </div>
+          <div class="plan pop">
+            <div class="badge">Basic</div>
+            <div class="price">₩9,900<span class="muted" style="font-size:12px">/월</span></div>
+            <div class="muted">질문 150 / OCR 100</div>
+            <button class="btn primary">구독</button>
+          </div>
+          <div class="plan">
+            <div class="badge">Pro</div>
+            <div class="price">₩19,900<span class="muted" style="font-size:12px">/월</span></div>
+            <div class="muted">질문 300 / OCR 300 • 우선 처리</div>
+            <button class="btn small">구독</button>
+          </div>
+          <div class="plan">
+            <div class="badge">Pro+</div>
+            <div class="price">₩29,900<span class="muted" style="font-size:12px">/월</span></div>
+            <div class="muted">여러 풀이, 대용량 PDF</div>
+            <button class="btn small">구독</button>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="grid cols-2">
+          <div class="panel">
+            <h3>결제 수단</h3>
+            <div class="muted">카드/계좌이체/휴대폰/토스·카카오·네이버페이</div>
+            <div class="notice" style="margin-top:8px"><div>ℹ️</div><div>정기결제, 연간 -20% • 환불: 7일 이내 미사용 전액</div></div>
+          </div>
+          <div class="panel">
+            <h3>구독 관리</h3>
+            <div class="muted">현재 상태, 다음 결제일, 변경/해지, 영수증</div>
+            <div style="margin-top:8px;display:flex;gap:8px">
+              <button class="btn small">상세 보기</button>
+              <button class="btn small">영수증 발급</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="settings" class="page">
+        <section class="grid cols-3">
+        <div class="panel">
+          <h3>⑦ 프로필</h3>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="avatar"></div>
+            <div>
+              <div><strong>홍길동</strong></div>
+              <div class="muted">2학년 • SN고</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <input class="input" placeholder="목표 대학/학과"/>
+          <button class="btn small" style="margin-top:8px">저장</button>
+        </div>
+        <div class="panel">
+          <h3>알림</h3>
+          <label><input type="checkbox" checked/> 답변 완료</label><br/>
+          <label><input type="checkbox"/> 복습 리마인더</label><br/>
+          <label><input type="checkbox"/> 목표 달성</label>
+        </div>
+        <div class="panel">
+          <h3>보안</h3>
+          <button class="btn small">비밀번호 변경</button>
+          <button class="btn small">2단계 인증</button>
+          <div class="muted" style="margin-top:6px">로그인 히스토리, 소셜 계정 연결, 계정 탈퇴</div>
+        </div>
+      </section>
+      </div>
+
+      <!-- SUPPORT -->
+      <div id="support" class="page">
+        <section class="grid cols-2">
+        <div class="panel">
+          <h3>⑧ FAQ</h3>
+          <div class="row" style="grid-template-columns:1fr 100px">
+            <div>질문은 어떻게 올리나요?</div>
+            <button class="btn small">보기</button>
+          </div>
+          <div class="row" style="grid-template-columns:1fr 100px">
+            <div>환불 기준은?</div>
+            <button class="btn small">보기</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>1:1 문의</h3>
+          <input class="input" placeholder="제목"/>
+          <textarea class="input" placeholder="문의 내용을 입력하세요"></textarea>
+          <div class="toolbar"><span class="chip">📎 파일 첨부</span></div>
+          <button class="btn primary">보내기</button>
+        </div>
+      </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // SPA Navigation System
+    class SPANavigator {
+      constructor() {
+        this.currentPage = 'overview';
+        this.init();
+      }
+
+      init() {
+        // 사이드바 링크에 이벤트 리스너 추가
+        document.querySelectorAll('.side-links a').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageId = link.getAttribute('href').substring(1);
+            this.navigateTo(pageId);
+          });
+        });
+
+        // URL 해시 변경 감지
+        window.addEventListener('hashchange', () => {
+          const pageId = window.location.hash.substring(1) || 'overview';
+          this.navigateTo(pageId);
+        });
+
+        // 초기 페이지 로드
+        const pageId = window.location.hash.substring(1) || 'overview';
+        this.navigateTo(pageId);
+      }
+
+      navigateTo(pageId) {
+        // 유효한 페이지 ID인지 확인
+        const validPages = ['overview', 'auth', 'new-question', 'history', 'pricing', 'settings', 'support'];
+        if (!validPages.includes(pageId)) {
+          pageId = 'overview';
+        }
+
+        // 현재 페이지 숨기기
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+
+        // 선택된 페이지 보이기
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+          targetPage.classList.add('active');
+        }
+
+        // 사이드바 활성 상태 업데이트
+        document.querySelectorAll('.side-links a').forEach(link => {
+          link.classList.remove('active');
+        });
+
+        const activeLink = document.querySelector(`.side-links a[href="#${pageId}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+
+        // URL 해시 업데이트
+        if (window.location.hash !== `#${pageId}`) {
+          window.history.pushState(null, null, `#${pageId}`);
+        }
+
+        this.currentPage = pageId;
+
+        // 페이지 전환 후 스크롤을 맨 위로
+        window.scrollTo(0, 0);
+      }
+
+      // 프로그래밍 방식으로 페이지 이동
+      goToPage(pageId) {
+        this.navigateTo(pageId);
+      }
+
+      // 현재 페이지 ID 반환
+      getCurrentPage() {
+        return this.currentPage;
+      }
+    }
+
+    // Chat System
+    class ChatSystem {
+      constructor() {
+        this.messages = [];
+        this.isTyping = false;
+        this.init();
+      }
+
+      init() {
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+
+        if (chatInput && chatSendBtn && chatMessages) {
+          // 전송 버튼 클릭 이벤트
+          chatSendBtn.addEventListener('click', () => this.sendMessage());
+
+          // Enter 키 이벤트 (Shift+Enter는 줄바꿈)
+          chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              this.sendMessage();
+            }
+          });
+
+          // 입력창 자동 높이 조절
+          chatInput.addEventListener('input', () => {
+            this.autoResizeTextarea(chatInput);
+          });
+        }
+      }
+
+      autoResizeTextarea(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+      }
+
+      sendMessage() {
+        const chatInput = document.getElementById('chatInput');
+        const message = chatInput.value.trim();
+
+        if (!message) return;
+
+        // 사용자 메시지 추가
+        this.addMessage('user', message);
+        
+        // 입력창 초기화
+        chatInput.value = '';
+        chatInput.style.height = 'auto';
+
+        // AI 응답 시뮬레이션
+        this.simulateAIResponse(message);
+      }
+
+      addMessage(sender, content, timestamp = null) {
+        const chatMessages = document.getElementById('chatMessages');
+        if (!chatMessages) return;
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'message-avatar';
+        avatar.textContent = sender === 'user' ? '나' : 'SN';
+
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        messageContent.innerHTML = content;
+
+        const messageTime = document.createElement('div');
+        messageTime.className = 'message-time';
+        messageTime.textContent = timestamp || this.getCurrentTime();
+
+        messageContent.appendChild(messageTime);
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+
+        // 스크롤을 맨 아래로
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        this.messages.push({ sender, content, timestamp: messageTime.textContent });
+      }
+
+      simulateAIResponse(userMessage) {
+        this.showTypingIndicator();
+
+        // AI 응답 시뮬레이션 (실제로는 API 호출)
+        setTimeout(() => {
+          this.hideTypingIndicator();
+          const response = this.generateAIResponse(userMessage);
+          this.addMessage('assistant', response);
+        }, 1500 + Math.random() * 1000);
+      }
+
+      generateAIResponse(userMessage) {
+        // 간단한 응답 생성 (실제로는 AI API 호출)
+        const responses = [
+          `"${userMessage}"에 대한 답변을 준비하고 있습니다.`,
+          `좋은 질문이네요! 단계별로 설명해드리겠습니다.`,
+          `이 문제를 해결하기 위해 다음과 같이 접근해보겠습니다.`,
+          `수학적 개념을 바탕으로 자세히 설명드리겠습니다.`
+        ];
+
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+        
+        return `
+          <div class="step-indicator">
+            <span>🤔</span>
+            <span>질문 분석 중...</span>
+          </div>
+          ${randomResponse}
+          
+          <div class="step-indicator">
+            <span>📝</span>
+            <span>단계별 풀이</span>
+          </div>
+          <div class="math-block">
+            // 여기에 실제 수학 풀이가 들어갑니다
+            // 실제 구현 시 AI API에서 받은 응답을 표시
+          </div>
+          
+          <div class="step-indicator">
+            <span>💡</span>
+            <span>추가 학습 제안</span>
+          </div>
+          관련된 개념이나 유사한 문제를 더 연습해보시는 것을 추천드립니다.
+        `;
+      }
+
+      showTypingIndicator() {
+        const chatMessages = document.getElementById('chatMessages');
+        if (!chatMessages) return;
+
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message assistant typing-message';
+        typingDiv.innerHTML = `
+          <div class="message-avatar">SN</div>
+          <div class="message-content">
+            <div class="typing-indicator">
+              <span>SNarGPT가 답변을 준비하고 있습니다</span>
+              <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        this.isTyping = true;
+      }
+
+      hideTypingIndicator() {
+        const typingMessage = document.querySelector('.typing-message');
+        if (typingMessage) {
+          typingMessage.remove();
+        }
+        this.isTyping = false;
+      }
+
+      getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString('ko-KR', { 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        });
+      }
+    }
+
+    // Chat History System
+    class ChatHistorySystem {
+      constructor() {
+        this.chats = this.loadChats();
+        this.init();
+      }
+
+      init() {
+        this.setupSearchAndFilter();
+        this.renderChatList();
+      }
+
+      loadChats() {
+        // 로컬 스토리지에서 채팅 목록 로드 (실제로는 서버에서)
+        const saved = localStorage.getItem('snargpt_chats');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        
+        // 샘플 데이터
+        return [
+          {
+            id: 'chat-001',
+            title: '함수 f(x)=x²-3x+2의 극값',
+            preview: 'f\'(x) = 2x - 3 = 0 → x = 1.5에서 극솟값...',
+            subject: 'math',
+            status: 'completed',
+            messageCount: 5,
+            lastMessageTime: new Date(Date.now() - 2 * 60 * 1000), // 2분 전
+            messages: []
+          },
+          {
+            id: 'chat-002',
+            title: '확률분포의 기댓값 계산',
+            preview: 'E[X] = Σ x·P(X=x) 공식을 사용하여...',
+            subject: 'math',
+            status: 'completed',
+            messageCount: 8,
+            lastMessageTime: new Date(Date.now() - 60 * 60 * 1000), // 1시간 전
+            messages: []
+          },
+          {
+            id: 'chat-003',
+            title: '문장 삽입 유형 해설',
+            preview: '문맥상 가장 적절한 문장을 찾는 문제...',
+            subject: 'english',
+            status: 'ongoing',
+            messageCount: 3,
+            lastMessageTime: new Date(Date.now() - 3 * 60 * 60 * 1000), // 3시간 전
+            messages: []
+          },
+          {
+            id: 'chat-004',
+            title: '전기회로 옴의 법칙',
+            preview: 'V = I × R 공식을 적용하여 전압을 구하는...',
+            subject: 'physics',
+            status: 'completed',
+            messageCount: 6,
+            lastMessageTime: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1일 전
+            messages: []
+          },
+          {
+            id: 'chat-005',
+            title: '미적분 기본정리 증명',
+            preview: 'F\'(x) = f(x)인 함수 F(x)를 찾는 과정...',
+            subject: 'math',
+            status: 'completed',
+            messageCount: 12,
+            lastMessageTime: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2일 전
+            messages: []
+          }
+        ];
+      }
+
+      saveChats() {
+        localStorage.setItem('snargpt_chats', JSON.stringify(this.chats));
+      }
+
+      setupSearchAndFilter() {
+        const searchInput = document.getElementById('chatSearch');
+        const subjectFilter = document.getElementById('subjectFilter');
+        const statusFilter = document.getElementById('statusFilter');
+
+        if (searchInput) {
+          searchInput.addEventListener('input', () => this.filterChats());
+        }
+        if (subjectFilter) {
+          subjectFilter.addEventListener('change', () => this.filterChats());
+        }
+        if (statusFilter) {
+          statusFilter.addEventListener('change', () => this.filterChats());
+        }
+      }
+
+      filterChats() {
+        const searchTerm = document.getElementById('chatSearch')?.value.toLowerCase() || '';
+        const subjectFilter = document.getElementById('subjectFilter')?.value || '';
+        const statusFilter = document.getElementById('statusFilter')?.value || '';
+
+        const filteredChats = this.chats.filter(chat => {
+          const matchesSearch = chat.title.toLowerCase().includes(searchTerm) || 
+                               chat.preview.toLowerCase().includes(searchTerm);
+          const matchesSubject = !subjectFilter || chat.subject === subjectFilter;
+          const matchesStatus = !statusFilter || chat.status === statusFilter;
+          
+          return matchesSearch && matchesSubject && matchesStatus;
+        });
+
+        this.renderChatList(filteredChats);
+      }
+
+      renderChatList(chatsToRender = null) {
+        const chatList = document.getElementById('chatList');
+        const emptyState = document.getElementById('emptyState');
+        
+        if (!chatList) return;
+
+        const chats = chatsToRender || this.chats;
+
+        if (chats.length === 0) {
+          chatList.style.display = 'none';
+          if (emptyState) emptyState.style.display = 'block';
+          return;
+        }
+
+        chatList.style.display = 'block';
+        if (emptyState) emptyState.style.display = 'none';
+
+        chatList.innerHTML = chats.map(chat => `
+          <div class="chat-item" onclick="openChat('${chat.id}')">
+            <div class="chat-item-header">
+              <div class="chat-item-title">${chat.title}</div>
+              <div class="chat-item-time">${this.formatTime(chat.lastMessageTime)}</div>
+            </div>
+            <div class="chat-item-preview">${chat.preview}</div>
+            <div class="chat-item-meta">
+              <span class="badge">${this.getSubjectName(chat.subject)}</span>
+              <span class="badge">${this.getStatusName(chat.status)}</span>
+              <span class="chat-item-message-count">${chat.messageCount}개 메시지</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      formatTime(date) {
+        const now = new Date();
+        const diff = now - date;
+        const minutes = Math.floor(diff / (1000 * 60));
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        if (minutes < 1) return '방금 전';
+        if (minutes < 60) return `${minutes}분 전`;
+        if (hours < 24) return `${hours}시간 전`;
+        return `${days}일 전`;
+      }
+
+      getSubjectName(subject) {
+        const subjects = {
+          'math': '수학',
+          'english': '영어',
+          'physics': '물리',
+          'chemistry': '화학'
+        };
+        return subjects[subject] || subject;
+      }
+
+      getStatusName(status) {
+        const statuses = {
+          'completed': '완료',
+          'ongoing': '진행중',
+          'pending': '대기'
+        };
+        return statuses[status] || status;
+      }
+
+      addNewChat(title, preview, subject = 'math') {
+        const newChat = {
+          id: `chat-${Date.now()}`,
+          title,
+          preview,
+          subject,
+          status: 'ongoing',
+          messageCount: 0,
+          lastMessageTime: new Date(),
+          messages: []
+        };
+
+        this.chats.unshift(newChat);
+        this.saveChats();
+        this.renderChatList();
+        
+        return newChat.id;
+      }
+
+      updateChat(chatId, updates) {
+        const chatIndex = this.chats.findIndex(chat => chat.id === chatId);
+        if (chatIndex !== -1) {
+          this.chats[chatIndex] = { ...this.chats[chatIndex], ...updates };
+          this.saveChats();
+          this.renderChatList();
+        }
+      }
+    }
+
+    // 페이지 로드 시 SPA 초기화
+    document.addEventListener('DOMContentLoaded', () => {
+      window.spaNavigator = new SPANavigator();
+      window.chatSystem = new ChatSystem();
+      window.chatHistorySystem = new ChatHistorySystem();
+      
+      // 개발자 도구에서 사용할 수 있도록 전역 함수 제공
+      window.goToPage = (pageId) => window.spaNavigator.goToPage(pageId);
+      
+      console.log('SNarGPT SPA가 초기화되었습니다.');
+      console.log('사용 가능한 페이지:', ['overview', 'auth', 'new-question', 'history', 'pricing', 'settings', 'support']);
+      console.log('페이지 이동 예시: goToPage("new-question")');
+    });
+
+    // 추가 유틸리티 함수들
+    function showNotification(message, type = 'info') {
+      // 간단한 알림 시스템 (향후 확장 가능)
+      const colors = {
+        'info': '#2196F3',
+        'success': '#4CAF50',
+        'warning': '#FF9800',
+        'error': '#F44336'
+      };
+      
+      console.log(`[${type.toUpperCase()}] ${message}`);
+      
+      // 실제로는 토스트 알림을 표시
+      // showToast(message, colors[type] || colors.info);
+    }
+
+    function toggleSidebar() {
+      // 모바일에서 사이드바 토글 (향후 구현)
+      console.log('사이드바 토글');
+    }
+
+    function uploadImage() {
+      // 이미지 업로드 기능 (향후 구현)
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          showNotification('이미지 업로드 기능은 곧 추가될 예정입니다.', 'info');
+        }
+      };
+      input.click();
+    }
+
+    function startVoiceInput() {
+      // 음성 입력 기능 (향후 구현)
+      showNotification('음성 입력 기능은 곧 추가될 예정입니다.', 'info');
+    }
+
+    function openChat(chatId) {
+      // 채팅 열기 기능 (향후 구현)
+      showNotification(`채팅 "${chatId}"을 열고 있습니다...`, 'info');
+      // 실제로는 해당 채팅의 메시지들을 로드하고 채팅 화면으로 이동
+      // goToPage('chat-detail', { chatId: chatId });
+    }
+
+    // New Question Page Functions
+    let selectedSubject = 'math';
+    let selectedExplorationSubject = null;
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      if (dropdown) {
+        dropdown.classList.toggle('show');
+      }
+    }
+
+    function selectSubject(subject) {
+      // Update active tab
+      document.querySelectorAll('.subject-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelector(`[data-subject="${subject}"]`).classList.add('active');
+      
+      selectedSubject = subject;
+      
+      // Show/hide exploration submenu
+      const explorationSubmenu = document.getElementById('explorationSubmenu');
+      if (subject === 'exploration') {
+        explorationSubmenu.style.display = 'block';
+      } else {
+        explorationSubmenu.style.display = 'none';
+        selectedExplorationSubject = null;
+      }
+    }
+
+    function selectExplorationSubject(subject) {
+      // Update selected exploration subject
+      document.querySelectorAll('.submenu-item').forEach(item => {
+        item.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+      
+      selectedExplorationSubject = subject;
+      
+      // Update main subject tab to show selected exploration subject
+      const explorationTab = document.querySelector('[data-subject="exploration"]');
+      const subjectNames = {
+        'physics1': '물리학 I',
+        'physics2': '물리학 II',
+        'chemistry1': '화학 I',
+        'chemistry2': '화학 II',
+        'biology1': '생명과학 I',
+        'biology2': '생명과학 II',
+        'earth1': '지구과학 I',
+        'earth2': '지구과학 II',
+        'korean-history': '한국사',
+        'world-history': '세계사',
+        'geography': '지리',
+        'ethics': '윤리와 사상',
+        'society-culture': '사회·문화',
+        'politics-law': '정치와 법',
+        'economy': '경제',
+        'life-culture': '생활과 윤리',
+        'world-geography': '세계지리'
+      };
+      
+      const subjectName = subjectNames[subject] || subject;
+      explorationTab.querySelector('.subject-name').textContent = subjectName;
+    }
+
+    function sendMainQuestion() {
+      const input = document.getElementById('mainQuestionInput');
+      const question = input.value.trim();
+      
+      if (!question) return;
+      
+      // Get selected subject info
+      const subjectInfo = getSelectedSubjectInfo();
+      
+      // Hide welcome screen and show chat container
+      const welcomeScreen = document.querySelector('.welcome-screen');
+      const chatContainer = document.getElementById('chatContainer');
+      
+      if (welcomeScreen && chatContainer) {
+        welcomeScreen.style.display = 'none';
+        chatContainer.style.display = 'flex';
+        
+        // Initialize chat with the question
+        if (window.chatSystem) {
+          window.chatSystem.addMessage('user', question);
+          window.chatSystem.simulateAIResponse(question);
+        }
+        
+        // Add to chat history with subject info
+        if (window.chatHistorySystem) {
+          const preview = question.length > 50 ? question.substring(0, 50) + '...' : question;
+          window.chatHistorySystem.addNewChat(question, preview, subjectInfo.code);
+        }
+      }
+      
+      input.value = '';
+    }
+
+    function getSelectedSubjectInfo() {
+      if (selectedSubject === 'exploration' && selectedExplorationSubject) {
+        return {
+          code: selectedExplorationSubject,
+          name: getExplorationSubjectName(selectedExplorationSubject),
+          category: 'exploration'
+        };
+      } else {
+        const subjectNames = {
+          'math': '수학',
+          'korean': '국어',
+          'english': '영어',
+          'exploration': '탐구'
+        };
+        return {
+          code: selectedSubject,
+          name: subjectNames[selectedSubject] || selectedSubject,
+          category: selectedSubject
+        };
+      }
+    }
+
+    function getExplorationSubjectName(code) {
+      const subjectNames = {
+        'physics1': '물리학 I',
+        'physics2': '물리학 II',
+        'chemistry1': '화학 I',
+        'chemistry2': '화학 II',
+        'biology1': '생명과학 I',
+        'biology2': '생명과학 II',
+        'earth1': '지구과학 I',
+        'earth2': '지구과학 II',
+        'korean-history': '한국사',
+        'world-history': '세계사',
+        'geography': '지리',
+        'ethics': '윤리와 사상',
+        'society-culture': '사회·문화',
+        'politics-law': '정치와 법',
+        'economy': '경제',
+        'life-culture': '생활과 윤리',
+        'world-geography': '세계지리'
+      };
+      return subjectNames[code] || code;
+    }
+
+
+    // Dropdown menu functions
+    function addFromGoogleDrive() {
+      showNotification('Google Drive 연동 기능은 곧 추가될 예정입니다.', 'info');
+      toggleDropdown();
+    }
+
+    function startDeepResearch() {
+      showNotification('심층 리서치 모드가 활성화되었습니다.', 'info');
+      toggleDropdown();
+    }
+
+    function enablePerfectAnswerMode() {
+      showNotification('무조건 정답 내는 모드는 유료 기능입니다. 업그레이드가 필요합니다.', 'warning');
+      toggleDropdown();
+      // 실제로는 결제 페이지로 이동
+      // goToPage('pricing');
+    }
+
+    function enableGraphImageMode() {
+      showNotification('그래프, 이미지 출력 모드는 유료 기능입니다. 업그레이드가 필요합니다.', 'warning');
+      toggleDropdown();
+      // 실제로는 결제 페이지로 이동
+      // goToPage('pricing');
+    }
+
+    function showMoreOptions() {
+      showNotification('추가 옵션을 불러오는 중...', 'info');
+      toggleDropdown();
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('dropdownMenu');
+      const toggleBtn = document.querySelector('.action-btn');
+      
+      if (dropdown && !dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+
+    // Handle Enter key in main input
+    document.addEventListener('DOMContentLoaded', () => {
+      const mainInput = document.getElementById('mainQuestionInput');
+      if (mainInput) {
+        mainInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMainQuestion();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
